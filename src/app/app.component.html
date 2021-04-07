@@ -1,0 +1,67 @@
+<div>
+  
+<div class="button-hr">
+<button (click)="getDataFromApi()" class="btn btn-primary btn-lg btn-block">Get Data</button>  
+</div>
+
+<div class="form-group">
+  <input 
+    class="form-control" 
+    id="searhCapital" 
+    placeholder="Search in Capital.."
+    [(ngModel)]="filterText"    
+  >
+  <small *ngIf="filterText" class="form-text text-muted">
+    Searched ' {{filterText.toLocaleUpperCase()}} ' in capital
+  </small>
+  <br>
+  <br>
+   
+</div>
+
+<div class="form-group">
+  <input 
+    class="form-control" 
+    id="searhAll" 
+    placeholder="Search in All.."
+    [(ngModel)]="filterAll"    
+  >
+  <small *ngIf="filterAll" class="form-text text-muted">
+    Searched ' {{filterAll.toLocaleUpperCase()}} ' in all
+  </small>
+  <br>
+  <br>
+   
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Capital</th>
+      <th>Region</th>
+      <th>Flag</th>
+    </tr>
+  </thead>
+  
+  <tbody *ngFor="let d of data | search:filterText">
+    <tr >
+      <td>{{d.name}} </td>
+      <td>{{d.capital}} </td>
+      <td>{{d.region}} </td>
+      <td><div class="flagImage-hr"><img src={{d.flag}} ></div></td>
+    </tr>
+  </tbody>
+  
+  <tbody  *ngIf="filterAll">
+    <tr *ngFor="let d of data | all:filterAll">
+      <td>{{d.name}}</td>
+      <td>{{d.capital}}</td>
+      <td>{{d.region}}</td>
+      <td><div class="flagImage-hr"><img src={{d.flag}} ></div></td>
+    </tr>
+  </tbody>
+
+</table>
+
+</div>
